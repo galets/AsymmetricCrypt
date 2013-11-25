@@ -12,19 +12,19 @@ Usage:
 
 1. Generate private key:
 
-    AsymmetricCrypt --genkey >private.key
+    `AsymmetricCrypt --genkey >private.key`
 
 2. Extract public key component from private key:
 
-    AsymmetricCrypt --publickey <private.key >public.key
+    `AsymmetricCrypt --publickey <private.key >public.key`
 
 3. Encrypt file using public key:   
 
-    AsymmetricCrypt --encrypt public.key <plaintext.txt >encrypted.ascr
+    `AsymmetricCrypt --encrypt public.key <plaintext.txt >encrypted.ascr`
    
 4. Decrypt file using private key:
 
-    AsymmetricCrypt --decrypt private.key <encrypted.ascr >plaintext.txt
+    `AsymmetricCrypt --decrypt private.key <encrypted.ascr >plaintext.txt`
 
 
 Internals:
@@ -44,5 +44,4 @@ Installing on Ubuntu:
 
 Must install prerequisites using following commands:
 
-    sudo apt-get install mono-runtime
-	sudo apt-get install libmono-system2.0-cil 
+    `sudo apt-get install mono-runtime libmono-system2.0-cil`
