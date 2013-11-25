@@ -12,19 +12,19 @@ data encryption on the systems, where storing password or key in cleartext is no
 Usage:
 -------------------------
 
-1. Generate private key:
+Generate private key:
 
 	AsymmetricCrypt --genkey >private.key
 
-2. Extract public key component from private key:
+Extract public key component from private key:
 
 	AsymmetricCrypt --publickey <private.key >public.key
 
-3. Encrypt file using public key:   
+Encrypt file using public key:   
 
 	AsymmetricCrypt --encrypt public.key <plaintext.txt >encrypted.ascr
    
-4. Decrypt file using private key:
+Decrypt file using private key:
 
 	AsymmetricCrypt --decrypt private.key <encrypted.ascr >plaintext.txt
 
