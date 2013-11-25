@@ -4,11 +4,13 @@ AsymmetricCrypt
 Simple .NET asymmetric encryption implementation
 
 Purpose:
+-------------------------
 
 data encryption on the systems, where storing password or key in cleartext is not desirable option.
 
 
 Usage:
+-------------------------
 
 1. Generate private key:
 
@@ -28,6 +30,7 @@ Usage:
 
 
 Internals:
+-------------------------
 
 Each file is encrypted using AES256 with randomly generated key. AES256 key is encrypted using 4096
 bit RSA and stored with the file.
@@ -41,6 +44,7 @@ File structure:
 
 
 Installing on Ubuntu:
+-------------------------
 
 Must install prerequisites using following commands:
 
