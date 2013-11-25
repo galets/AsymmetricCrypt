@@ -12,20 +12,26 @@ data encryption on the systems, where storing password or key in cleartext is no
 Usage:
 -------------------------
 
+Tool will use standard io streams where possible, or files could be specified on command line
+
 Generate private key:
 
+	AsymmetricCrypt --genkey private.key
 	AsymmetricCrypt --genkey >private.key
 
 Extract public key component from private key:
 
+	AsymmetricCrypt --publickey private.key public.key
 	AsymmetricCrypt --publickey <private.key >public.key
 
 Encrypt file using public key:   
 
+	AsymmetricCrypt --encrypt public.key plaintext.txt encrypted.ascr
 	AsymmetricCrypt --encrypt public.key <plaintext.txt >encrypted.ascr
    
 Decrypt file using private key:
 
+	AsymmetricCrypt --decrypt private.key encrypted.ascr plaintext.txt
 	AsymmetricCrypt --decrypt private.key <encrypted.ascr >plaintext.txt
 
 

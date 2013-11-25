@@ -116,39 +116,66 @@ namespace AsymmetricCrypt
 
                     var pk = NewAsymmetricAlgorithm(true);
                     var xml = pk.ToXmlString(true);
-                    Console.Out.WriteLine(xml);
-                    Console.Out.Close();
+                    using (var stream = (args.Length >= 2) ? new StreamWriter(args[1]) : Console.Out)
+                    {
+                        stream.WriteLine(xml);
+                    }
                 }
                 else if (args[0] == "--publickey")
                 {
                     var pk = NewAsymmetricAlgorithm();
-                    var privateKey = Console.In.ReadToEnd();
-                    pk.FromXmlString(privateKey);
+                    using (var keyStream = (args.Length >= 2) ? new StreamReader(args[1]) : Console.In)
+                    {
+                        var privateKey = keyStream.ReadToEnd();
+                        pk.FromXmlString(privateKey);
+                    }
                     var xml = pk.ToXmlString(false);
-                    Console.WriteLine(xml);
-                    Console.Out.Close();
+                    using (var stream = (args.Length >= 3) ? new StreamWriter(args[2]) : Console.Out)
+                    {
+                        stream.WriteLine(xml);
+                    }
                 }
                 else if (args[0] == "--encrypt")
                 {
+                    if (args.Length < 2)
+                    {
+                        throw new ArgumentException();
+                    }
+
                     var pk = NewAsymmetricAlgorithm();
 
-                    using (var tr = new StreamReader(args[1]))
+                    using (var keyStream = new StreamReader(args[1]))
                     {
-                        var privateKey = tr.ReadToEnd();
+                        var privateKey = keyStream.ReadToEnd();
                         pk.FromXmlString(privateKey);
                     }
-                    Encrypt(Console.OpenStandardInput(), Console.OpenStandardOutput(), pk);
+
+                    using (var input = (args.Length >= 3) ? new FileStream(args[2], FileMode.Open) : Console.OpenStandardInput())
+                    using (var output = (args.Length >= 4) ? new FileStream(args[3], FileMode.Create) : Console.OpenStandardOutput())
+                    {
+                        Encrypt(input, output, pk);
+                    }
                 }
                 else if (args[0] == "--decrypt")
                 {
+                    if (args.Length < 2)
+                    {
+                        throw new ArgumentException();
+                    }
+
                     var pk = NewAsymmetricAlgorithm();
 
-                    using (var tr = new StreamReader(args[1]))
+                    using (var keyStream = new StreamReader(args[1]))
                     {
-                        var privateKey = tr.ReadToEnd();
+                        var privateKey = keyStream.ReadToEnd();
                         pk.FromXmlString(privateKey);
                     }
-                    Decrypt(Console.OpenStandardInput(), Console.OpenStandardOutput(), pk);
+
+                    using (var input = (args.Length >= 3) ? new FileStream(args[2], FileMode.Open) : Console.OpenStandardInput())
+                    using (var output = (args.Length >= 4) ? new FileStream(args[3], FileMode.Create) : Console.OpenStandardOutput())
+                    {
+                        Decrypt(input, output, pk);
+                    }
                 }
                 else
                 {
@@ -160,10 +187,10 @@ namespace AsymmetricCrypt
                 Console.Error.WriteLine("Usage:");
                 Console.Error.WriteLine("   AsymmetricCrypt [--encrypt|--decrypt|--genkey|--publickey]");
                 Console.Error.WriteLine("Example:");
-                Console.Error.WriteLine("   AsymmetricCrypt --genkey >private.key");
-                Console.Error.WriteLine("   AsymmetricCrypt --publickey <private.key >public.key");
-                Console.Error.WriteLine("   AsymmetricCrypt --encrypt public.key <plaintext.txt >encrypted.ascr");
-                Console.Error.WriteLine("   AsymmetricCrypt --decrypt private.key <encrypted.ascr >plaintext.txt");
+                Console.Error.WriteLine("   AsymmetricCrypt --genkey private.key");
+                Console.Error.WriteLine("   AsymmetricCrypt --publickey [private.key [public.key]]");
+                Console.Error.WriteLine("   AsymmetricCrypt --encrypt public.key [plaintext.txt [encrypted.ascr]]");
+                Console.Error.WriteLine("   AsymmetricCrypt --decrypt private.key [encrypted.ascr [plaintext.txt]]");
                 return 1;
             }
             catch (Exception ex)

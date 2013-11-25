@@ -74,6 +74,7 @@
   <ItemGroup>
     <None Include="LICENSE-2.0" />
     <None Include="README.md" />
+    <None Include="unit-test.cmd" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -81,7 +82,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) $(ProjectDir)Binary\</PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)unit-test.cmd || exit 1
+copy $(TargetPath) $(ProjectDir)Binary\</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
