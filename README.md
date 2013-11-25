@@ -39,3 +39,10 @@ File structure:
     512 bytes:  RSA 4096-encrypted AES key
     rest:       encrypted file contents
 
+
+Installing on Ubuntu:
+
+Must install prerequisites using following commands:
+
+    sudo apt-get install mono-runtime
+	sudo apt-get install libmono-system2.0-cil 
