@@ -44,6 +44,5 @@ Installing on Ubuntu:
 
 Must install prerequisites using following commands:
 
-    `sudo apt-get install mono-runtime libmono-system2.0-cil`
+    sudo apt-get install mono-runtime libmono-system2.0-cil
 
-.
