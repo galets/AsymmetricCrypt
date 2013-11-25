@@ -34,8 +34,8 @@ bit RSA and stored with the file.
 
 File structure:
 
-4 bytes:    signature  "ASCR"
-16 bytes:   AES IV
-512 bytes:  RSA 4096-encrypted AES key
-rest:       encrypted file contents
+    4 bytes:    signature  "ASCR"
+    16 bytes:   AES IV
+    512 bytes:  RSA 4096-encrypted AES key
+    rest:       encrypted file contents
 
