@@ -52,7 +52,11 @@ File structure:
 Installing on Ubuntu:
 -------------------------
 
-Must install prerequisites using following commands:
+Install using following commands:
 
-	sudo apt-get install mono-runtime libmono-system2.0-cil
+	sudo apt-get install mono-runtime libmono-system2.0-cil wget
+	sudo mkdir -p /usr/share/ascry
+	sudo wget https://raw.github.com/galets/AsymmetricCrypt/master/Binary/AsymmetricCrypt.exe -O /usr/share/ascry/AsymmetricCrypt.exe
+	sudo chmod +x /usr/share/ascry/AsymmetricCrypt.exe
+	sudo ln -s /usr/share/ascry/AsymmetricCrypt.exe /usr/bin/ascry
 
